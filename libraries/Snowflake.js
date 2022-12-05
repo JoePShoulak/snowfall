@@ -2,6 +2,7 @@ class Snowflake {
   static gravity = new p5.Vector(0, 0.01);
 
   static spinRate = 1 / 500;
+  static windRate = 1 / 100;
   static noiseSeedMax = 10;
 
   static randSize(min, max, smallPref = 1) {
@@ -25,11 +26,14 @@ class Snowflake {
   }
 
   get spinTime() {
-    return frameCount * Snowflake.spinRate;
+    return this.seed + frameCount * Snowflake.spinRate;
+  }
+  get windTime() {
+    return this.seed + frameCount * Snowflake.windRate;
   }
 
   get wind() {
-    return new createVector(map(noise(this.seed), 0, 1, -0.001, 0.001), 0);
+    return new createVector(map(noise(this.windTime), 0, 1, -0.01, 0.01), 0);
   }
 
   applyForce(force) {
@@ -43,7 +47,7 @@ class Snowflake {
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.mult(0);
-    this.angle = this.startAngle + TWO_PI * noise(this.seed + this.spinTime);
+    this.angle = this.startAngle + TWO_PI * noise(this.spinTime);
 
     this.draw();
   }
