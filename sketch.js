@@ -16,7 +16,7 @@ const tileSize = { x: 32, y: 32 };
 let flakeTilesheet;
 let flakeImages = [];
 let snow = [];
-const scaleFactor = 0.0000002;
+const scaleFactor = 0.0000004;
 
 function preload() {
   flakeTilesheet = loadImage("./assets/flakes32.png", cutTilesheet);
