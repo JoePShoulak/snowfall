@@ -6,15 +6,17 @@
 
 function windowResized() {
   resizeCanvas(innerWidth, innerHeight);
+  reset();
 }
 
 const randomFlake = () => new Snowflake(random(flakeImages));
 
-const flakeRate = 0.4;
+let flakeRate;
 const tileSize = { x: 32, y: 32 };
 let flakeTilesheet;
 let flakeImages = [];
 let snow = [];
+const scaleFactor = 0.0000002;
 
 function preload() {
   flakeTilesheet = loadImage("./assets/flakes32.png", cutTilesheet);
@@ -28,9 +30,14 @@ function cutTilesheet() {
   }
 }
 
+function reset() {
+  flakeRate = width * height * scaleFactor;
+}
+
 function setup() {
   createCanvas(innerWidth, innerHeight);
   imageMode(CENTER);
+  reset();
 }
 
 function draw() {
