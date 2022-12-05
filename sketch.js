@@ -36,6 +36,6 @@ function setup() {
 function draw() {
   background(20);
   snow.forEach((s) => s.update());
-  snow = snow.filter((s) => s.pos.y < height);
+  snow = snow.filter((s) => s.pos.y < height + tileSize.y);
   if (random() < flakeRate) snow.push(randomFlake());
 }
